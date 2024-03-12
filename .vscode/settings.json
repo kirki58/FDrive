@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "command.h": "c",
-        "stdio.h": "c",
-        "errno.h": "c",
-        "chrono": "c",
-        "typeinfo": "c"
-    }
-}
