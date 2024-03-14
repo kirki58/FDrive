@@ -30,24 +30,23 @@ int cmd_create_table(char* db_name, char* table_name){
         printf("[ERROR]: Invalid table or database name passed in as input\n");
         return -1;
     }
-    char path[144];
+    char path[76];
     strcpy(path, DBPATH);
     strncat(path, db_name, DBNAME_MAX_CHAR);
 
     if(access(path, F_OK) == 0){
-        if(access(strncat(path, table_name, TBNAME_MAX_CHAR), F_OK) == -1){
-            FILE *file = fopen(strncat(path, ".fd", 3), "w");
-            if(file == "NULL"){
-                printf("[ERROR]: Internal error while creating table %s.%s, try again\n",db_name,table_name);
-                return -1;
-            }
-            fclose(file);
-            return 0;
-        }
-        else{
-            printf("[ERROR]: Table %s.%s already exists\n", db_name, table_name);
+        chdir(path);
+        if(access(strncat(table_name, ".fd", 4), F_OK) == 0){
+            printf("[ERROR]: Table %s.%s already exists!", db_name, table_name);
             return -1;
         }
+        FILE* table = fopen(table_name, "w");
+        if(table == NULL){
+            printf("[ERROR]: Internal error while creating table, please try again");
+            return -1;
+        }
+        fclose(table);
+        return 0;
     }
     else{
         printf("[ERROR]: Database %s don't seem to exist!\n", db_name);
