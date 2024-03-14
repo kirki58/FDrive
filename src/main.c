@@ -9,7 +9,7 @@ void validate_command(int argc ,int argc_min, int argc_max){
         exit(-1);
     }
     if(argc > argc_max){
-        printf("[ERROR]: create_database can't take this much arguements!\n");
+        printf("[ERROR]: This command can't take this much arguements!\n");
         exit(-1);
     }
 }
