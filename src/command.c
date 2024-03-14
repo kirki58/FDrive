@@ -27,7 +27,7 @@ int cmd_create_database(char* name){
 
 int cmd_create_table(char* db_name, char* table_name){
     if(strlen(table_name) > TBNAME_MAX_CHAR || strlen(db_name) > DBNAME_MAX_CHAR){
-        printf("[ERROR]: Invalid table or database name passed in as input\n");
+        printf("[ERROR]: Too long table or database name passed in as input\n");
         return -1;
     }
     char path[76];
@@ -37,12 +37,12 @@ int cmd_create_table(char* db_name, char* table_name){
     if(access(path, F_OK) == 0){
         chdir(path);
         if(access(strncat(table_name, ".fd", 4), F_OK) == 0){
-            printf("[ERROR]: Table %s.%s already exists!", db_name, table_name);
+            printf("[ERROR]: Table %s.%s already exists!\n", db_name, table_name);
             return -1;
         }
         FILE* table = fopen(table_name, "w");
         if(table == NULL){
-            printf("[ERROR]: Internal error while creating table, please try again");
+            printf("[ERROR]: Internal error while creating table, please try again\n");
             return -1;
         }
         fclose(table);
@@ -52,4 +52,13 @@ int cmd_create_table(char* db_name, char* table_name){
         printf("[ERROR]: Database %s don't seem to exist!\n", db_name);
         return -1;
     }
+}
+
+int cmd_create_template(char* table_prefix){
+    chdir(DBPATH);
+    char** prefix = compile_prefix(table_prefix);
+    chdir((*prefix));
+
+    char* table_src = strncat( *(prefix+1), ".fd", 4 );
+    FILE* table = fopen(table_src, "w");
 }
