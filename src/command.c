@@ -4,6 +4,8 @@
 #define TBNAME_MAX_CHAR 64
 #define DBPATH "../database/"
 
+char* datatypes[] = {"int", "float", "str"};
+
 int cmd_create_database(char* name){
     //Check "name" parameter to prevent buffer overflows.
     if(strlen(name) > DBNAME_MAX_CHAR){
@@ -38,6 +40,7 @@ int cmd_create_table(char* db_name, char* table_name){
         chdir(path);
         if(access(strncat(table_name, ".fd", 4), F_OK) == 0){
             printf("[ERROR]: Table %s.%s already exists!\n", db_name, table_name);
+            chdir("../../src");
             return -1;
         }
         FILE* table = fopen(table_name, "w");
@@ -46,19 +49,11 @@ int cmd_create_table(char* db_name, char* table_name){
             return -1;
         }
         fclose(table);
+        printf("[SUCCESS]: Table %s.%s created!", db_name, table_name);
         return 0;
     }
     else{
         printf("[ERROR]: Database %s don't seem to exist!\n", db_name);
         return -1;
     }
-}
-
-int cmd_create_template(char* table_prefix){
-    chdir(DBPATH);
-    char** prefix = compile_prefix(table_prefix);
-    chdir((*prefix));
-
-    char* table_src = strncat( *(prefix+1), ".fd", 4 );
-    FILE* table = fopen(table_src, "w");
 }

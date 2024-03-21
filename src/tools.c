@@ -18,11 +18,11 @@ char** compile_prefix(char* table_prefix){
     char** table_data = (char**) malloc(sizeof(char*) * 2);
     char* occ = strchr(table_prefix, '.');
     if(occ == NULL){
-        printf("[ERROR]: table %s not found. Table names should be passed in as 'database.table'\n", table_prefix);
+        printf("[ERROR]: table %s is not valid. Table names should be passed in as 'database.table'\n", table_prefix);
         exit(-1);
     }
     if(occ != strrchr(table_prefix, '.')){
-        printf("[ERROR]: table %s not found. Table names can't contain dots\n", table_prefix);
+        printf("[ERROR]: table %s is not valid. Table names can't contain dots\n", table_prefix);
         exit(-1);
     }
 

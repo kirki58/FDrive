@@ -4,6 +4,18 @@
 #include <string.h>
 #include <tools.h>
 
+char* dtypes[] = {"int", "float", "str"};
+
+int is_datatype(char* str){
+    int res = -1;
+    for (size_t i = 0; i < sizeof(dtypes) / sizeof(char*); i++){
+        if(strcmp(dtypes[i], str) == 0){
+            res = 0;
+        }
+    }
+    return res;
+}
+
 int main(int argc, char* argv[]){
     if(argc ==  1){
         //No Command-Line Arguements passed
@@ -27,7 +39,6 @@ int main(int argc, char* argv[]){
             free(prefix);
             return 0;
         }
-
         else{
             printf("No such command is found!\n");
             return -1;
