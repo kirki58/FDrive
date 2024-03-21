@@ -39,6 +39,14 @@ int main(int argc, char* argv[]){
             free(prefix);
             return 0;
         }
+
+        //validate create_template command
+        if(strcmp(argv[1], "create_template") == 0){
+            validate_command(argc, 2, 4);
+            char** prefix = compile_prefix(argv[2]);
+            cmd_create_template((*prefix), *(prefix+sizeof(char*) ), argv[3]);
+            return 0;
+        }
         else{
             printf("No such command is found!\n");
             return -1;

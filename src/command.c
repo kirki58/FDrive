@@ -57,3 +57,22 @@ int cmd_create_table(char* db_name, char* table_name){
         return -1;
     }
 }
+
+int cmd_create_template(char* db_name, char* table_name, char* props){
+    chdir(DBPATH);
+    chdir(db_name);
+
+    char filename[TBNAME_MAX_CHAR + 4];
+    strcpy(filename, table_name);
+    strncat(filename, ".fd", 4);
+
+    FILE* table = fopen(filename, "w");
+    if(table == NULL){
+        printf("[ERROR]: Internal error while creating template!");
+        return -1;
+    }
+    fprintf(table,"template=%s",props);
+    fclose(table);
+    printf("[SUCCESS]: Template written!\n");
+    return 0;
+}

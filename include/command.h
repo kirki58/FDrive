@@ -11,6 +11,6 @@
 
 int cmd_create_database(char* name);
 int cmd_create_table(char* db_name, char* table_name);
-int cmd_create_template(char* table_prefix, char* template);
+int cmd_create_template(char* db_name, char* table_name, char* props);
 
 #endif
