@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <tools.h>
+#include <validation.h>
 
 char* dtypes[] = {"int", "float", "str"};
 
@@ -30,7 +31,6 @@ int main(int argc, char* argv[]){
             cmd_create_database(argv[2]);
             return 0;
         }
-
         //validate create_table command
         if(strcmp(argv[1], "create_table") == 0){
             validate_command(argc, 2, 3);
@@ -44,6 +44,10 @@ int main(int argc, char* argv[]){
         if(strcmp(argv[1], "create_template") == 0){
             validate_command(argc, 2, 4);
             char** prefix = compile_prefix(argv[2]);
+            if(validate_prefix((*prefix), *(prefix+sizeof(char*)) ) == -1){
+                printf("Error: Prefix is not valid\n");
+                return -1;
+            }
             cmd_create_template((*prefix), *(prefix+sizeof(char*) ), argv[3]);
             return 0;
         }

@@ -1,16 +1,5 @@
 #include <tools.h>
 
-void validate_command(int argc ,int argc_min, int argc_max){
-    if(argc == argc_min){
-        printf("[ERROR]: Not enough arguements for create_database!\n");
-        exit(-1);
-    }
-    if(argc > argc_max){
-        printf("[ERROR]: This command can't take this much arguements!\n");
-        exit(-1);
-    }
-}
-
 char** compile_prefix(char* table_prefix){
     //input should be passed as "database.table"
     //there must be exactly 1 dot in the name string.
