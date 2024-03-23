@@ -8,9 +8,10 @@
 #include <errno.h>
 #include <unistd.h>
 #include <tools.h>
+#include <validation.h>
 
 int cmd_create_database(char* name);
-int cmd_create_table(char* db_name, char* table_name);
-int cmd_create_template(char* db_name, char* table_name, char* props);
+int cmd_create_table(char* prefix);
+int cmd_create_template(char* prefix, char* props);
 
 #endif
