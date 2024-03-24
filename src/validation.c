@@ -1,6 +1,6 @@
 #include <validation.h>
 
-char* dtypes[] = {"int", "float", "str"};
+char* dtypes[] = {"int", "float", "str", "bool", "double"};
 
 int is_datatype(char* str){
     int res = -1;
@@ -47,14 +47,14 @@ int validate_template(char* props){
     char* propscopy = strdup(props);
     char* prop = strtok(propscopy, ",");
     while(prop != NULL){
-        char* datatype = strstr(prop, ":");
-        datatype += sizeof(char);
+        char* datatype = strstr(prop, ":"); // finds the first occurance of ':' in prop and returns the pointer to it
+        datatype += sizeof(char); // moves the pointer to the next character after ':' so "datatype" doesn't actually include ':'
         if(is_datatype(datatype) != 0){
             printf("[ERROR]: Invalid datatype %s found in template!\n", datatype);
             free(propscopy);
             return -1;
         }
-        prop = strtok(NULL, ",");
+        prop = strtok(NULL, ","); // moves to the next property
     }
     free(propscopy);
     return 0;

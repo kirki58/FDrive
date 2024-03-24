@@ -1,5 +1,8 @@
-main : src/main.c command.o
-	gcc $(CFLAGS) -Iinclude src/main.c lib/command.o lib/tools.o lib/validation.o -o bin/main$(CFLAGS)
+main : src/main.c fdrive.a
+	gcc $(CFLAGS) -Iinclude src/main.c -Llib -lfdrive -o bin/main$(CFLAGS)
+
+fdrive.a : command.o tools.o validation.o
+	ar rcs lib/libfdrive.a lib/command.o lib/tools.o lib/validation.o
 
 command.o : src/command.c tools.o
 	gcc $(CFLAGS) -c -Iinclude src/command.c -o lib/command.o
