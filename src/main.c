@@ -5,18 +5,6 @@
 #include <tools.h>
 #include <validation.h>
 
-char* dtypes[] = {"int", "float", "str"};
-
-int is_datatype(char* str){
-    int res = -1;
-    for (size_t i = 0; i < sizeof(dtypes) / sizeof(char*); i++){
-        if(strcmp(dtypes[i], str) == 0){
-            res = 0;
-        }
-    }
-    return res;
-}
-
 int main(int argc, char* argv[]){
     if(argc ==  1){
         //No Command-Line Arguements passed
@@ -41,6 +29,9 @@ int main(int argc, char* argv[]){
         //validate and run create_template command
         if(strcmp(argv[1], "create_template") == 0){
             validate_command(argc, 2, 4);
+            if(validate_template(argv[3]) != 0){
+                return -1;
+            }
             cmd_create_template(argv[2], argv[3]);
             return 0;
         }

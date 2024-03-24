@@ -1,5 +1,17 @@
 #include <validation.h>
 
+char* dtypes[] = {"int", "float", "str"};
+
+int is_datatype(char* str){
+    int res = -1;
+    for (size_t i = 0; i < sizeof(dtypes) / sizeof(char*); i++){
+        if(strcmp(dtypes[i], str) == 0){
+            res = 0;
+        }
+    }
+    return res;
+}
+
 void validate_command(int argc ,int argc_min, int argc_max){
     if(argc == argc_min){
         printf("[ERROR]: Not enough arguements for create_database!\n");
@@ -29,4 +41,21 @@ FILE* validate_prefix(char* prefix){
     FILE* table = fopen(path, "a+");
     free(pref);
     return table;
+}
+
+int validate_template(char* props){
+    char* propscopy = strdup(props);
+    char* prop = strtok(propscopy, ",");
+    while(prop != NULL){
+        char* datatype = strstr(prop, ":");
+        datatype += sizeof(char);
+        if(is_datatype(datatype) != 0){
+            printf("[ERROR]: Invalid datatype %s found in template!\n", datatype);
+            free(propscopy);
+            return -1;
+        }
+        prop = strtok(NULL, ",");
+    }
+    free(propscopy);
+    return 0;
 }

@@ -4,8 +4,6 @@
 #define TBNAME_MAX_CHAR 64
 #define DBPATH "../database/"
 
-char* datatypes[] = {"int", "float", "str"};
-
 int cmd_create_database(char* name){
     //Check "name" parameter to prevent buffer overflows.
     if(strlen(name) > DBNAME_MAX_CHAR){
