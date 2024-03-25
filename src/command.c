@@ -1,9 +1,5 @@
 #include <command.h>
 
-#define DBNAME_MAX_CHAR 64
-#define TBNAME_MAX_CHAR 64
-#define DBPATH "../database/"
-
 int cmd_create_database(char* name){
     //Check "name" parameter to prevent buffer overflows.
     if(strlen(name) > DBNAME_MAX_CHAR){

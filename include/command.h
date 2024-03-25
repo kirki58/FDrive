@@ -1,6 +1,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <commondef.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>

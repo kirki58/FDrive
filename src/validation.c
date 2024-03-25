@@ -1,8 +1,7 @@
 #include <validation.h>
 
-char* dtypes[] = {"int", "float", "str", "bool", "double"};
-
 int is_datatype(char* str){
+    char* dtypes[] = DTYPES;
     int res = -1;
     for (size_t i = 0; i < sizeof(dtypes) / sizeof(char*); i++){
         if(strcmp(dtypes[i], str) == 0){

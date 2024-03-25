@@ -1,9 +1,7 @@
 #ifndef VALIDATION_H
 #define VALIDATION_H
 
-#define DBPATH "../database/"
-#define DBNAME_MAX_CHAR 64
-#define TBNAME_MAX_CHAR 64
+#include <commondef.h>
 
 #include <stdio.h>
 #include <string.h>
