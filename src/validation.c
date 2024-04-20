@@ -13,7 +13,7 @@ int is_datatype(char* str){
 
 void validate_command(int argc ,int argc_min, int argc_max){
     if(argc == argc_min){
-        printf("[ERROR]: Not enough arguements for create_database!\n");
+        printf("[ERROR]: Not enough arguements for this command!\n");
         exit(-1);
     }
     if(argc > argc_max){

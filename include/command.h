@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <tools.h>
 #include <validation.h>
+#include <object.h>
 
 int cmd_create_database(char* name);
 int cmd_create_table(char* prefix);
