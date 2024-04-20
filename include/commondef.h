@@ -4,6 +4,6 @@
 #define DBPATH "../database/"
 #define DBNAME_MAX_CHAR 64
 #define TBNAME_MAX_CHAR 64
-#define DTYPES {"int", "float", "str", "bool", "double"}
+#define DTYPES {"int", "float", "str"}
 
 #endif // COMMONDEF_H

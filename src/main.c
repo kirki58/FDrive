@@ -35,6 +35,13 @@ int main(int argc, char* argv[]){
             cmd_create_template(argv[2], argv[3]);
             return 0;
         }
+
+        //test
+        if(strcmp(argv[1], "test") == 0){
+            int res = get_prop_dtype(argv[2]);
+            printf("%d\n", res);
+            return 0;
+        }
         else{
             printf("No such command is found!\n");
             return -1;

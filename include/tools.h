@@ -5,7 +5,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <command.h>
+#include <object.h>
+#include <commondef.h>
+#include <regex.h>
 
 char** compile_prefix(char* table_prefix);
+int check_regex(char* str, const char* pattern);
+int get_prop_dtype(char* prop);
+// struct object* parse_props(char* props);
 
 #endif

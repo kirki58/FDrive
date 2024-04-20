@@ -16,5 +16,6 @@
 int cmd_create_database(char* name);
 int cmd_create_table(char* prefix);
 int cmd_create_template(char* prefix, char* props);
+int cmd_insert(char* prefix, char* values);
 
 #endif

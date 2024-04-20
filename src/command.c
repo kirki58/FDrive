@@ -80,3 +80,14 @@ int cmd_create_template(char* prefix, char* props){
     printf("[SUCCESS]: Template written!\n");
     return 0;
 }
+
+int cmd_insert(char* prefix, char* props){
+    FILE* table = validate_prefix(prefix);
+    if(table == NULL){
+        printf("[ERROR]: Internal error. Most probably table %s doesn't exist\n", prefix);
+        return -1;
+    }
+    
+    fseek(table, 0L, SEEK_END);
+    
+}
