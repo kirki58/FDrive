@@ -27,6 +27,7 @@ struct object{
 };
 
 struct object* init_object();
+void free_object(struct object* obj);
 
 void obj_add_int(struct object* obj ,char* key, int value);
 int* obj_get_int(struct object* obj, char* key);

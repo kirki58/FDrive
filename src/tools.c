@@ -48,21 +48,64 @@ int get_prop_dtype(char* prop){
     // this function takes in a prop in form of "prop1:16"
     // in this case it should return 0 since 16 is an integer
     // 0 represents integer , 1 represents float, 2 represents string -1 represents error
-    char* propcpy;
+    char* propcpy = (char*) malloc(strlen(prop) + 1);
     strcpy(propcpy, prop);
-    char *token = strtok(propcpy, ":");
-    token = strtok(NULL, ":"); // get to the second token
-
+    propcpy[strlen(prop)] = '\0';
+    char *token = strchr(propcpy, ':');
+    token++;
+    
     if( token[0] != '0' && (check_regex(token, "^-?[0-9]+\\.[0-9]+$") == 0)){
+        free(propcpy);
         return 1;
     }
     else if(token[0] != '0'&& (check_regex(token, "-?[0-9]+$") == 0)){
+        free(propcpy);
         return 0;
     }
     else if(check_regex(token, "^\"[^\"]*\"$") == 0){
+        free(propcpy);
         return 2;
     }
     else{
         return -1;
     }
+}
+
+struct object* parse_props(char* props){
+    // this function takes in "props" string as parameter in form of "prop1:16,prop2:16.0,prop3:"string"
+    // it should return a struct object* with the properties set as the input string
+    char propscpy[strlen(props) + 1];
+    strcpy(propscpy, props);
+    propscpy[strlen(props)] = '\0';
+    char* token = strtok(propscpy, ",");
+    struct object* obj = init_object();
+    while(token != NULL){
+        char* value = strchr(token, ':');
+        int pos = value - token;
+        value++;
+        char* key = malloc(pos + 1);
+        strncpy(key, token, pos);
+        key[pos] = '\0';
+
+        int dtype = get_prop_dtype(token);
+        switch(dtype){
+            case -1:
+                printf("[ERROR]: Invalid data type for property %s\n", key);
+                exit(-1);
+                break;
+            case 0:
+                obj_add_int(obj, key, atoi(value));
+                break;
+            case 1:
+                obj_add_float(obj, key, atof(value));
+                break;
+            case 2:
+                obj_add_str(obj, key, value);
+                break;
+            default:
+                break;
+        }
+        token = strtok(NULL, ",");
+    }
+    return obj;
 }

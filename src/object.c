@@ -8,6 +8,38 @@ struct object* init_object(){
     return obj;
 }
 
+void free_object(struct object* obj){
+    if (obj->ihash != NULL){
+        struct inthash *current_entry, *tmp;
+        HASH_ITER(hh, obj->ihash, current_entry, tmp){
+            free(obj->ihash->key);
+            HASH_DEL(obj->ihash, current_entry);
+            free(current_entry);
+        }
+    }
+    if(obj->fhash != NULL){
+        struct floathash *current_entry, *tmp;
+        HASH_ITER(hh, obj->fhash, current_entry, tmp){
+            free(obj->fhash->key);
+            HASH_DEL(obj->fhash, current_entry);
+            free(current_entry);
+        }
+    }
+    if(obj->shash != NULL){
+        struct strhash *current_entry, *tmp;
+        HASH_ITER(hh, obj->shash, current_entry, tmp){
+            free(obj->shash->key);
+            HASH_DEL(obj->shash, current_entry);
+            free(current_entry);
+        }
+    }
+    free(obj->ihash);
+    free(obj->fhash);
+    free(obj->shash);
+    free(obj);
+    return;
+}
+
 void obj_add_int(struct object* obj, char* key, int value){
     struct inthash *kv = (struct inthash*) malloc(sizeof(struct inthash));
     kv->key = key;

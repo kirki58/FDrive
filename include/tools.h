@@ -12,6 +12,6 @@
 char** compile_prefix(char* table_prefix);
 int check_regex(char* str, const char* pattern);
 int get_prop_dtype(char* prop);
-// struct object* parse_props(char* props);
+struct object* parse_props(char* props);
 
 #endif

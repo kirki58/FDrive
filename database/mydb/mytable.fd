@@ -2,3 +2,4 @@ template=prop1:int,prop2:str,prop3:float
 
 0=1,"hello",2.2;
 1=22,"world",1.2;
+2=10,NULL,1.4;
