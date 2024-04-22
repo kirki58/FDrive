@@ -29,6 +29,7 @@ void free_object(struct object* obj){
         struct strhash *current_entry, *tmp;
         HASH_ITER(hh, obj->shash, current_entry, tmp){
             free(obj->shash->key);
+            free(obj->shash->value);
             HASH_DEL(obj->shash, current_entry);
             free(current_entry);
         }

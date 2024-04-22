@@ -37,10 +37,11 @@ int main(int argc, char* argv[]){
         }
 
         if(strcmp(argv[1], "test") == 0){
-            struct object* obj = parse_props("prop1:16,prop2:12.0,prop3:\"string\"");
+            struct object* obj = parse_props("prop1:16,prop2:12.0,prop3:\"string\",prop4:14.0");
             printf("prop2: %f\n", *(obj_get_float(obj, "prop2")));
             printf("prop3: %s\n", obj_get_str(obj, "prop3"));
             printf("prop1: %d\n", *(obj_get_int(obj, "prop1")));
+            printf("prop4: %f\n", *(obj_get_float(obj, "prop4")));
             free_object(obj);
             return 0;
         }

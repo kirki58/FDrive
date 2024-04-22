@@ -83,7 +83,7 @@ struct object* parse_props(char* props){
         char* value = strchr(token, ':');
         int pos = value - token;
         value++;
-        char* key = malloc(pos + 1);
+        char* key = (char*) malloc(pos + 1);
         strncpy(key, token, pos);
         key[pos] = '\0';
 
@@ -100,7 +100,10 @@ struct object* parse_props(char* props){
                 obj_add_float(obj, key, atof(value));
                 break;
             case 2:
-                obj_add_str(obj, key, value);
+                char* valuecpy = (char*) malloc(strlen(value) + 1);
+                strcpy(valuecpy, value);
+                valuecpy[strlen(value)] = '\0';
+                obj_add_str(obj, key, valuecpy);
                 break;
             default:
                 break;
