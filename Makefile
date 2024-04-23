@@ -13,5 +13,9 @@ tools.o : src/tools.c object.o
 object.o : src/object.c validation.o
 	gcc $(CFLAGS) -c -Iinclude src/object.c -o lib/object.o
 
-validation.o : src/validation.c
+validation.o : src/validation.c init 
 	gcc $(CFLAGS) -c -Iinclude src/validation.c -o lib/validation.o
+
+init:
+	mkdir -p bin
+	mkdir -p lib
