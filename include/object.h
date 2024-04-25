@@ -4,6 +4,8 @@
 #include <uthash.h>
 #include <unistd.h>
 #include <string.h>
+#include <object_gen/object_builder.h>
+#include <object_gen/object_reader.h>
 
 struct inthash{
     char* key;
@@ -37,5 +39,8 @@ char* obj_get_str(struct object* obj, char* key);
 
 void obj_add_float(struct object* obj, char* key, float value);
 float* obj_get_float(struct object* obj, char* key);
+
+//serialize object and deserşealize
+void obj_serialize(struct object* obj, void* buffer, size_t* size);
 
 #endif

@@ -22,7 +22,7 @@ void validate_command(int argc ,int argc_min, int argc_max){
     }
 }
 
-FILE* validate_prefix(char* prefix){
+FILE* validate_prefix(char* prefix, char* mode){
     char** pref = compile_prefix(prefix);
     char* db_name = *pref;
     char* table_name = *(pref + sizeof(char*));
@@ -37,7 +37,7 @@ FILE* validate_prefix(char* prefix){
         free(pref);
         return NULL;
     }
-    FILE* table = fopen(path, "a+");
+    FILE* table = fopen(path, mode);
     free(pref);
     return table;
 }

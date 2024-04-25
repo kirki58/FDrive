@@ -85,3 +85,41 @@ float* obj_get_float(struct object* obj, char* key){
     }
     return &(kv->value);
 }
+void obj_serialize(struct object* obj, void* buffer, size_t* size){
+    //create a flatbuffer builder
+    flatcc_builder_t builder;
+    flatcc_builder_init(&builder);
+
+    //start the object
+    FDrive_Object_start_as_root(&builder);
+
+    //hash tables
+    struct inthash *ih;
+    struct strhash *sh;
+    struct floathash *fh;
+
+    //serialize int hash
+    FDrive_IntHash_vec_start(&builder);
+    for(ih=obj->ihash; ih!=NULL; ih=ih->hh.next){
+        FDrive_IntHash_create(&builder, flatbuffers_string_create_str(&builder, ih->key), (int32_t) ih->value);
+    }
+    FDrive_Object_ihash_add(&builder, FDrive_IntHash_vec_end(&builder));
+
+    //serialize string hash
+    FDrive_StrHash_vec_start(&builder);
+    for(sh=obj->shash; sh!=NULL; sh=sh->hh.next){
+        FDrive_StrHash_create(&builder, flatbuffers_string_create_str(&builder, sh->key), flatbuffers_string_create_str(&builder, sh->value));
+    }
+    FDrive_Object_shash_add(&builder, FDrive_StrHash_vec_end(&builder));
+
+    //serialize float hash
+    FDrive_FloatHash_vec_start(&builder);
+    for(fh=obj->fhash; fh!=NULL; fh=fh->hh.next){
+        FDrive_FloatHash_create(&builder, flatbuffers_string_create_str(&builder, fh->key), fh->value);
+    }
+    FDrive_Object_fhash_add(&builder, FDrive_FloatHash_vec_end(&builder));
+
+    //finish the object
+    FDrive_Object_end_as_root(&builder);
+    buffer = flatcc_builder_get_direct_buffer(&builder, size);
+}

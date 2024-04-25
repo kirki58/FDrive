@@ -1,0 +1,24 @@
+namespace FDrive;
+
+table IntHash {
+  key:string;
+  value:int;
+}
+
+table StrHash {
+  key:string;
+  value:string;
+}
+
+table FloatHash {
+  key:string;
+  value:float;
+}
+
+table Object {
+  ihash:[IntHash];
+  shash:[StrHash];
+  fhash:[FloatHash];
+}
+
+root_type Object;

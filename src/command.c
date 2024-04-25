@@ -60,7 +60,7 @@ int cmd_create_table(char* prefix){
 }
 
 int cmd_create_template(char* prefix, char* props){
-    FILE* table = validate_prefix(prefix);
+    FILE* table = validate_prefix(prefix, "a+");
     if(table == NULL){
         printf("[ERROR]: Internal error. Most probably table %s doesn't exist\n", prefix);
         return -1;
@@ -82,7 +82,7 @@ int cmd_create_template(char* prefix, char* props){
 }
 
 int cmd_insert(char* prefix, char* props){
-    FILE* table = validate_prefix(prefix);
+    FILE* table = validate_prefix(prefix, "wb");
     if(table == NULL){
         printf("[ERROR]: Internal error. Most probably table %s doesn't exist\n", prefix);
         return -1;

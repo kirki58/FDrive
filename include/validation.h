@@ -14,7 +14,7 @@
 int is_datatype(char* str);
 
 void validate_command(int argc ,int argc_min, int argc_max);
-FILE* validate_prefix(char* prefix);
+FILE* validate_prefix(char* prefix, char* mode);
 int validate_template(char* props);
 
 #endif // VALIDATION_H
