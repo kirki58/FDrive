@@ -1,5 +1,12 @@
+BUILD_TYPE ?= release
+OUT_NAME = main
+ifeq ($(BUILD_TYPE), debug)
+	CFLAGS += -g
+	OUT_NAME = main_debug
+endif
+
 main : src/main.c fdrive.a
-	gcc $(CFLAGS) -Iinclude src/main.c -Llib -lfdrive -lflatcc -lflatccrt -o bin/main$(CFLAGS)
+	gcc $(CFLAGS) -Iinclude src/main.c -Llib -lfdrive -lflatcc -lflatccrt -o bin/$(OUT_NAME)
 
 fdrive.a : command.o tools.o validation.o object.o
 	ar rcs lib/libfdrive.a lib/command.o lib/tools.o lib/validation.o lib/object.o
