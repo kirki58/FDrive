@@ -1,4 +1,9 @@
 # Ignore all vscode files
 .vscode/
-bin/
-lib/
+bin/main
+bin/main-g
+lib/object.o
+lib/tools.o
+lib/validation.o
+lib/command.o
+lib/libfdrive.a
