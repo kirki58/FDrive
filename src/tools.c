@@ -119,15 +119,13 @@ struct object* parse_props(char* props){
     return obj;
 }
 
-// int write_buffer(char* prefix,void* buffer, size_t size){
-//     FILE* table = fopen(prefix, "wb");
-//     if(table != NULL){
-//         fwrite(buffer, size, 1, table);
-//         fclose(table);
-//         return 0;
-//     }
-//     else{
-//         printf("[ERROR]: Table %s does not exist\n", prefix);
-//         return -1;
-//     }
-// }
+int write_buffer(char* prefix,void* buffer, size_t size){
+    FILE *table = validate_prefix(prefix, "a+b");
+    if(table != NULL){
+        fwrite(buffer, size, 1, table);
+        fputs("\n", table);
+        fclose(table);
+        return 0;
+    }
+    return -1;
+}

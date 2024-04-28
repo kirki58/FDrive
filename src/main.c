@@ -39,17 +39,11 @@ int main(int argc, char* argv[]){
         if(strcmp(argv[1], "test") == 0){
             struct object* obj = parse_props("prop1:16,prop2:12.0,prop3:\"string\",prop4:14.0");
 
-            size_t* size;
-            void* buf;
-            obj_serialize(obj, buf, size);
+            size_t size;
+            void* buf = NULL;
+            obj_serialize(obj, &buf, &size);
 
-            FILE* table = validate_prefix("exampledb.mytable", "a+b");
-            if(table != NULL){
-                fwrite(buf, *size, 1, table);
-                fputs("\n", table);
-                fclose(table);
-            }
-            
+            write_buffer("exampledb.mytable",buf, size);
         }
 
         else{

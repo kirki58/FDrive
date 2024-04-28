@@ -40,7 +40,7 @@ char* obj_get_str(struct object* obj, char* key);
 void obj_add_float(struct object* obj, char* key, float value);
 float* obj_get_float(struct object* obj, char* key);
 
-//serialize object and deserşealize
-void obj_serialize(struct object* obj, void* buffer, size_t* size);
+//serialize object and deseriealize
+void obj_serialize(struct object* obj, void** buffer, size_t* size);
 
 #endif

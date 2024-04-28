@@ -85,7 +85,7 @@ float* obj_get_float(struct object* obj, char* key){
     }
     return &(kv->value);
 }
-void obj_serialize(struct object* obj, void* buffer, size_t* size){
+void obj_serialize(struct object* obj, void** buffer, size_t* size){
     //create a flatbuffer builder
     flatcc_builder_t builder;
     flatcc_builder_init(&builder);
@@ -121,5 +121,5 @@ void obj_serialize(struct object* obj, void* buffer, size_t* size){
 
     //finish the object
     FDrive_Object_end_as_root(&builder);
-    buffer = flatcc_builder_get_direct_buffer(&builder, size);
+    *buffer = flatcc_builder_get_direct_buffer(&builder, size);
 }
